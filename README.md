@@ -1,5 +1,5 @@
 # IbOnenoteExt
-Language: [English](README.md), [简体中文](README.zh-Hans.md)
+Languages: [English](README.md), [简体中文](README.zh-Hans.md)
 
 ## Feature
 1. Change default Chinese font to Microsoft YaHei.
