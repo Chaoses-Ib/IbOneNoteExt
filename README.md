@@ -2,7 +2,7 @@
 Languages: [English](README.md), [简体中文](README.zh-Hans.md)
 
 ## Feature
-1. Change default Chinese font to Microsoft YaHei.
+1. Change default English font (Calibri) to Microsoft YaHei.
 1. Force default scale into 100%.
 
 ## Support
