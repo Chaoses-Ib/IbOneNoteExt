@@ -59,5 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+    <None Include="..\README.md" />
+    <None Include="..\README.zh-Hans.md" />
   </ItemGroup>
 </Project>

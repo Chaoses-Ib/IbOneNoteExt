@@ -203,6 +203,8 @@
     <ClCompile Include="version.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\README.md" />
+    <None Include="..\README.zh-Hans.md" />
     <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
