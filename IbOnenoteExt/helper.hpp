@@ -2,14 +2,33 @@
 #include <string>
 #include <optional>
 #include <functional>
+#include "Detours/detours.h"
+#include <xmmintrin.h>
 
 using namespace std;
 using wchar = wchar_t;
 using byte_t = uint8_t; //since there is std::byte
+using QWORD = int64_t;
 
 void DebugOutput(const wchar* str);
 void DebugOutput(const wstring &str);
 void DebugOutput(const wstringstream &str);
+
+template<typename T>
+LONG IbDetourAttach(_Inout_ T* ppPointer, _In_ T pDetour) {
+    DetourTransactionBegin();
+    DetourUpdateThread(GetCurrentThread());
+    DetourAttach((void**)ppPointer, pDetour);
+    return DetourTransactionCommit();
+}
+
+template<typename T>
+LONG IbDetourDetach(_Inout_ T* ppPointer, _In_ T pDetour) {
+    DetourTransactionBegin();
+    DetourUpdateThread(GetCurrentThread());
+    DetourDetach((void**)ppPointer, pDetour);
+    return DetourTransactionCommit();
+}
 
 using offset_t = int32_t; //since size_t can't be negative
 

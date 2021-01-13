@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Detours">
+      <UniqueIdentifier>{d41ba39d-a81b-4c36-b9f7-d548fbb14171}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -21,10 +24,19 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Onenote.hpp">
+    <ClInclude Include="helper.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="helper.hpp">
+    <ClInclude Include="Detours\detours.h">
+      <Filter>Detours</Filter>
+    </ClInclude>
+    <ClInclude Include="Detours\detver.h">
+      <Filter>Detours</Filter>
+    </ClInclude>
+    <ClInclude Include="Detours\syelog.h">
+      <Filter>Detours</Filter>
+    </ClInclude>
+    <ClInclude Include="Onenote.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -39,6 +51,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="helper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Onenote.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
