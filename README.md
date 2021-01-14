@@ -16,7 +16,7 @@ Languages: [English](README.md), [简体中文](README.zh-Hans.md)
 1. Restart OneNote.
 
 ## Credits
-This project uses the following open source librarys:
+This project uses the following open source libraries:
 
 * [Detours](https://github.com/microsoft/detours)
 * [[Boost::ext].DI](https://github.com/boost-ext/di)
