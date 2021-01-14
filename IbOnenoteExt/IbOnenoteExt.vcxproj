@@ -182,9 +182,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Boost\di.hpp" />
     <ClInclude Include="Detours\detours.h" />
     <ClInclude Include="Detours\detver.h" />
     <ClInclude Include="Detours\syelog.h" />
+    <ClInclude Include="eventpp\callbacklist.h" />
+    <ClInclude Include="eventpp\eventdispatcher.h" />
+    <ClInclude Include="eventpp\eventpolicies.h" />
+    <ClInclude Include="eventpp\eventqueue.h" />
+    <ClInclude Include="eventpp\hetercallbacklist.h" />
+    <ClInclude Include="eventpp\hetereventdispatcher.h" />
+    <ClInclude Include="eventpp\hetereventqueue.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="helper.hpp" />
     <ClInclude Include="Onenote.hpp" />
@@ -193,7 +201,6 @@
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="helper.cpp" />
-    <ClCompile Include="Onenote.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -205,7 +212,6 @@
   <ItemGroup>
     <None Include="..\README.md" />
     <None Include="..\README.zh-Hans.md" />
-    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

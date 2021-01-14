@@ -81,7 +81,7 @@ struct addr {
 struct Module {
     union {
         HMODULE handle;
-        addr addr;
+        addr base;
     };
 
     Module(HMODULE handle) : handle(handle) {};
