@@ -140,5 +140,19 @@ namespace Onenote {
             };
         }
 
+        namespace Hyperlink {
+            class DisableHyperlinkWarning {
+            public:
+                DisableHyperlinkWarning(Modules::ONMain ONMain) {
+                    auto OpenUnsafeHyperlink = ONMain.base.offset(0x6882AC);
+                    OpenUnsafeHyperlink.offset(0x21).Unprotected(6, [](addr p) {
+                        const byte_t patch[] = { 0x48, 0x31, 0xC0, 0x90, 0x90, 0x90 };
+                        memcpy(p, patch, 6);
+                        return true;
+                    });
+                }
+            };
+        }
+
     }
 }

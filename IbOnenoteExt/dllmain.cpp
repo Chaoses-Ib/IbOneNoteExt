@@ -49,7 +49,10 @@ struct MyOnenote {
         }
     };
 
-    MyOnenote(ChangeCalibriToYahei& f1) { }
+    MyOnenote(
+        ChangeCalibriToYahei& f1,
+        Editor::Hyperlink::DisableHyperlinkWarning& f2
+    ) { }
 };
 
 BOOL APIENTRY DllMain(HMODULE hModule,
