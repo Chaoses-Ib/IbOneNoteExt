@@ -14,6 +14,7 @@ Languages: [English](README.md), [简体中文](README.zh-Hans.md)
 1. Restart OneNote.
 
 ## Configuration
+If you don't like the default behavior, you can modify it by following the steps below:
 1. Create version.dll.yaml in the same directory the version.dll in.
 1. Refer to the following content to edit it:
 ```yaml

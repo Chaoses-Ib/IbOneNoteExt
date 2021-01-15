@@ -14,6 +14,7 @@ Language: [English](README.md), [简体中文](README.zh-Hans)
 1. 重新启动 OneNote。
 
 ## 配置
+如果你不喜欢默认行为，你可以通过以下步骤来修改它：
 1. 在 version.dll 的相同目录下创建 version.dll.yaml。
 1. 参考以下内容进行编辑：
 ```yaml
