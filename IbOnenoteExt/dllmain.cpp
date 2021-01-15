@@ -6,6 +6,7 @@
 #include "Detours/detours.h"
 #include "Onenote.hpp"
 #include "Boost/di.hpp"
+#include "yaml-cpp/yaml.h"
 
 using namespace std;
 namespace di = boost::di;
@@ -46,10 +47,34 @@ struct MyOnenote {
         }
     };
 
-    MyOnenote(
-        ChangeCalibriToYahei& f1,
-        Editor::Hyperlink::DisableHyperlinkWarning& f2
-    ) { }
+    MyOnenote() {
+        YAML::Node default_config = YAML::Load(R"(
+Editor:
+  ChangeCalibriToYahei: true
+  DisableHyperlinkWarning: true
+)");
+        YAML::Node config;
+        try
+        {
+            config = YAML::LoadFile("version.dll.yaml");
+        }
+        catch (const YAML::BadFile&)
+        {
+            config = move(default_config);
+        }
+
+        auto injector = di::make_injector();
+#define GET(Path) [&default_config](YAML::Node node){ return node ? node : default_config Path; }(config Path)
+
+        if (GET(["Editor"]["ChangeCalibriToYahei"]).as<bool>()) {
+            static auto create = injector.create<ChangeCalibriToYahei>();
+        }
+        if (GET(["Editor"]["DisableHyperlinkWarning"]).as<bool>()) {
+            static auto create = injector.create<Editor::Hyperlink::DisableHyperlinkWarning>();
+        }
+
+#undef GET
+    }
 };
 
 BOOL APIENTRY DllMain(HMODULE hModule,
@@ -62,21 +87,22 @@ BOOL APIENTRY DllMain(HMODULE hModule,
     wstring path = *makeModule::CurrentProcess()->GetPath();
     DebugOutput(L"Loaded("s + to_wstring(ul_reason_for_call) + L") in: " + path);
 
+    optional<MyOnenote> onenote;
+
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
         DisableThreadLibraryCalls(hModule);
         DetourRestoreAfterWith();
-        if (!_wcsicmp(path.c_str(), Onenote::Path)) {
-            auto injector = di::make_injector();
-            static auto create = injector.create<MyOnenote>();
-        }
+        if (!_wcsicmp(path.c_str(), Onenote::Path))
+            onenote = MyOnenote();
         break;
     case DLL_THREAD_ATTACH:
         break;
     case DLL_THREAD_DETACH:
         break;
     case DLL_PROCESS_DETACH:
+        onenote.reset();
         break;
     }
     return TRUE;

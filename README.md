@@ -3,9 +3,6 @@ Languages: [English](README.md), [简体中文](README.zh-Hans.md)
 
 ## Features
 * Change font Calibri to Microsoft YaHei.
-    * Affects typing and style fonts.
-    * Affects display of existing text using Calibri.
-    * Make it unable to manually apply Calibri to text.
 * Disable warnings against opening unsafe hyperlinks.
 
 ## Supported Versions
@@ -16,9 +13,27 @@ Languages: [English](README.md), [简体中文](README.zh-Hans.md)
 1. Put version.dll into C:\Program Files\Microsoft Office\Office16.
 1. Restart OneNote.
 
+## Configuration
+1. Create version.dll.yaml in the same directory the version.dll in.
+1. Refer to the following content to edit it:
+```yaml
+# YAML
+Editor:
+  # Change font Calibri to Microsoft YaHei.
+  # Affects typing and style fonts.
+  # Affects display of existing text using Calibri.
+  # Make it unable to manually apply Calibri to text.
+  ChangeCalibriToYahei: true
+
+  # Disable warnings against opening unsafe hyperlinks.
+  DisableHyperlinkWarning: true
+```
+(UTF-8 encoding)
+
 ## Credits
 This project uses the following open source libraries:
 
 * [Detours](https://github.com/microsoft/detours)
 * [[Boost::ext].DI](https://github.com/boost-ext/di)
 * [eventpp](https://github.com/wqking/eventpp)
+* [yaml-cpp](https://github.com/jbeder/yaml-cpp)
