@@ -6,6 +6,7 @@ Language: [English](README.md), [简体中文](README.zh-Hans)
     * 影响输入和样式字体。
     * 影响现存 Calibri 文本的显示。
     * 导致不能再向文本应用 Calibri。
+* 关闭打开不安全超链接时的警告。
 
 ## 支持版本
 * Microsoft OneNote 2016 (16.0.5014.1000) MSO (16.0.5095.1000) 64-bit
