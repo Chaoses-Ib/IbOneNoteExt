@@ -6,7 +6,7 @@ Language: [English](README.md), [简体中文](README.zh-Hans)
 * 禁用打开不安全超链接时的警告。
 
 ## 支持版本
-* Microsoft OneNote 2016 (16.0.5014.1000) MSO (16.0.5095.1000) 64-bit
+* Microsoft OneNote 2016 (16.0.5014.1000) 64位
 
 ## 安装
 1. 关闭 OneNote，等几分钟。

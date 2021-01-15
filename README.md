@@ -6,7 +6,7 @@ Languages: [English](README.md), [简体中文](README.zh-Hans.md)
 * Disable warnings against opening unsafe hyperlinks.
 
 ## Supported Versions
-* Microsoft OneNote 2016 (16.0.5014.1000) MSO (16.0.5095.1000) 64-bit
+* Microsoft OneNote 2016 (16.0.5014.1000) 64-bit
 
 ## Installation
 1. Close OneNote, wait a moment.
