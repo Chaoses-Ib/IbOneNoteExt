@@ -40,6 +40,10 @@ namespace Onenote {
                     return GetFontByName(fontname, d10);
                 }
             public:
+                // If you modify fontname in callback:
+                // * Affects typing and style fonts
+                // * Affects display of existing text using the original font
+                // * Make it unable to manually apply the original font to text
                 static inline CallbackList<void(const wchar*(&fontname))> callbacks;
 
                 EventCreateFont(Modules::riched20& riched20) {
@@ -141,6 +145,8 @@ namespace Onenote {
         }
 
         namespace Hyperlink {
+            // Another way is adding a registry key: HKEY_CURRENT_USER\Software\Microsoft\Office\16.0\Common\Security\DisableHyperlinkWarning 1
+            // See https://docs.microsoft.com/en-us/office365/troubleshoot/administration/enable-disable-hyperlink-warning for details
             class DisableHyperlinkWarning {
             public:
                 DisableHyperlinkWarning(Modules::ONMain ONMain) {

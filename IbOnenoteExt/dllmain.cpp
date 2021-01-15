@@ -13,9 +13,6 @@ namespace di = boost::di;
 using namespace Onenote;
 struct MyOnenote {
     struct ChangeCalibriToYahei {
-        // Affects typing and style fonts.
-        // Affects display of existing Calibri text.
-        // Make it unable to apply Calibri to text.
         ChangeCalibriToYahei(Editor::Font::EventCreateFont& create_font) {
             create_font.callbacks.append([](const wchar* (&fontname)) {
                 DebugOutput(wstringstream() << "CreateFont " << fontname);

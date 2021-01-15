@@ -4,9 +4,9 @@ Languages: [English](README.md), [简体中文](README.zh-Hans.md)
 ## Features
 * Change font Calibri to Microsoft YaHei.
     * Affects typing and style fonts.
-    * Affects display of existing Calibri text.
-    * Make it unable to apply Calibri to text.
-* Disable warning against opening unsafe hyperlinks.
+    * Affects display of existing text using Calibri.
+    * Make it unable to manually apply Calibri to text.
+* Disable warnings against opening unsafe hyperlinks.
 
 ## Supported Versions
 * Microsoft OneNote 2016 (16.0.5014.1000) MSO (16.0.5095.1000) 64-bit
