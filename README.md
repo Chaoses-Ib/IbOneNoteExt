@@ -1,5 +1,5 @@
 # IbOnenoteExt
-Languages: [English](README.md), [简体中文](README.zh-Hans.md)
+Languages: [English](README.md), [简体中文](README.zh-Hans.md)  
 An extension for Microsoft OneNote.
 
 ## Features
