@@ -11,7 +11,8 @@ An extension for Microsoft OneNote.
 
 ## Installation
 1. Close OneNote, wait a moment.
-1. Put version.dll into C:\Program Files\Microsoft Office\Office16.
+1. Download release files from [Releases](../../releases).
+1. Put the version.dll in the release files into C:\Program Files\Microsoft Office\Office16 .
 1. Restart OneNote.
 
 ## Configuration

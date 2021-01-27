@@ -11,7 +11,8 @@ Microsoft OneNote 的一个扩展。
 
 ## 安装
 1. 关闭 OneNote，等几分钟。
-1. 把 version.dll 放进 C:\Program Files\Microsoft Office\Office16。
+1. 从 [Releases](../../releases) 下载发行文件。
+1. 把发行文件中的 version.dll 放进 C:\Program Files\Microsoft Office\Office16。
 1. 重新启动 OneNote。
 
 ## 配置
