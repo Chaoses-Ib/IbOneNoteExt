@@ -1,6 +1,7 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "pch.h"
 #include <string>
+#include <string_view>
 #include <sstream>
 #include "helper.hpp"
 #include "Detours/detours.h"
@@ -47,6 +48,47 @@ struct MyOnenote {
         }
     };
 
+    struct DontCopyAsImage {
+        static inline decltype(&SetClipboardData) SetClipboardData_;
+        static HANDLE __stdcall SetClipboardDataDetour(UINT uFormat, HANDLE hMem) {
+            if (uFormat == CF_DIB && !hMem)
+                return NULL;
+            return SetClipboardData_(uFormat, hMem);
+        }
+
+        static inline UINT html_format;
+        static inline decltype(&CloseClipboard) CloseClipboard_;
+        static BOOL __stdcall CloseClipboardDetour(){
+            do {
+                HANDLE h = GetClipboardData(html_format);
+                if (!h) break;
+                void* p = GlobalLock(h);
+                if (!p) break;
+
+                u8string_view html{ (const char8_t*)p, GlobalSize(h) };
+                // or contains() when C++23 is supported...
+                bool plain = html.find(u8"<img\r\n") == ""sv.npos && html.find(u8"<table ") == ""sv.npos;
+
+                GlobalUnlock(h);
+
+                if (!plain) {
+                    SetClipboardData_(CF_DIB, NULL);
+                }
+            } while (false);
+            return CloseClipboard_();
+        }
+        DontCopyAsImage() {
+            if (!html_format) {
+                html_format = RegisterClipboardFormatW(L"HTML Format");
+            }
+            SetClipboardData_ = &SetClipboardData;
+            IbDetourAttach(&SetClipboardData_, SetClipboardDataDetour);
+
+            CloseClipboard_ = &CloseClipboard;
+            IbDetourAttach(&CloseClipboard_, CloseClipboardDetour);
+        }
+    };
+
     MyOnenote() {
         YAML::Node default_config = YAML::Load(R"(
 Editor:
@@ -73,6 +115,9 @@ Editor:
             static auto create = injector.create<Editor::Hyperlink::DisableHyperlinkWarning>();
         }
 
+        {
+            static auto create = injector.create<DontCopyAsImage>();
+        }
 #undef GET
     }
 };
