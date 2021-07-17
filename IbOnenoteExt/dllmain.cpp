@@ -49,38 +49,61 @@ struct MyOnenote {
     };
 
     struct DontCopyAsImage {
+        static inline bool set_HTML_Format, set_CF_DIB_null;
+
+        static inline decltype(&OpenClipboard) OpenClipboard_;
+        static BOOL __stdcall OpenClipboardDetour(HWND hWndNewOwner) {
+            set_HTML_Format = set_CF_DIB_null = false;
+            return OpenClipboard_(hWndNewOwner);
+        }
+
         static inline decltype(&SetClipboardData) SetClipboardData_;
         static HANDLE __stdcall SetClipboardDataDetour(UINT uFormat, HANDLE hMem) {
-            if (uFormat == CF_DIB && !hMem)
+            if (uFormat == html_format)
+                set_HTML_Format = true;
+            else if (uFormat == CF_DIB && !hMem) {
+                set_CF_DIB_null = true;
                 return NULL;
+            }
             return SetClipboardData_(uFormat, hMem);
         }
 
         static inline UINT html_format;
         static inline decltype(&CloseClipboard) CloseClipboard_;
         static BOOL __stdcall CloseClipboardDetour(){
-            do {
-                HANDLE h = GetClipboardData(html_format);
-                if (!h) break;
-                void* p = GlobalLock(h);
-                if (!p) break;
+            if (set_CF_DIB_null) {
+                if (set_HTML_Format) {
+                    //plain text, tables, partial images, text and images
+                    HANDLE h = GetClipboardData(html_format);
+                    if (!h) goto end;
+                    void* p = GlobalLock(h);
+                    if (!p) goto end;
 
-                u8string_view html{ (const char8_t*)p, GlobalSize(h) };
-                // or contains() when C++23 is supported...
-                bool plain = html.find(u8"<img\r\n") == ""sv.npos && html.find(u8"<table ") == ""sv.npos;
+                    u8string_view html{ (const char8_t*)p, GlobalSize(h) };
+                    // or contains() when C++23 is supported...
+                    bool plain = html.find(u8"<img\r\n") == ""sv.npos && html.find(u8"<table ") == ""sv.npos;
 
-                GlobalUnlock(h);
+                    GlobalUnlock(h);
 
-                if (!plain) {
+                    if (!plain) {
+                        SetClipboardData_(CF_DIB, NULL);
+                    }
+                }
+                else {
+                    //partial images
                     SetClipboardData_(CF_DIB, NULL);
                 }
-            } while (false);
+            }
+            end:
             return CloseClipboard_();
         }
         DontCopyAsImage() {
             if (!html_format) {
                 html_format = RegisterClipboardFormatW(L"HTML Format");
             }
+            OpenClipboard_ = &OpenClipboard;
+            IbDetourAttach(&OpenClipboard_, OpenClipboardDetour);
+
             SetClipboardData_ = &SetClipboardData;
             IbDetourAttach(&SetClipboardData_, SetClipboardDataDetour);
 
