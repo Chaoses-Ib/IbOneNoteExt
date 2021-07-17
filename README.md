@@ -4,6 +4,7 @@ An extension for Microsoft OneNote.
 
 ## Features
 * Change font Calibri to Microsoft YaHei.
+* Do not copy as images when copying plain text.
 * Disable warnings against opening unsafe hyperlinks.
 
 ## Supported Versions
