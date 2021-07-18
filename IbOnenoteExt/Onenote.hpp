@@ -2,7 +2,7 @@
 #include "pch.h"
 #include <optional>
 #include "helper.hpp"
-#include "eventpp/callbacklist.h"
+#include <eventpp/callbacklist.h>
 
 namespace Onenote {
     using eventpp::CallbackList;

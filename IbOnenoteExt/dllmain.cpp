@@ -4,10 +4,10 @@
 #include <string_view>
 #include <sstream>
 #include "helper.hpp"
-#include "Detours/detours.h"
+#include <detours/detours.h>
 #include "Onenote.hpp"
-#include "Boost/di.hpp"
-#include "yaml-cpp/yaml.h"
+#include <boost/di.hpp>
+#include <yaml-cpp/yaml.h>
 
 using namespace std;
 namespace di = boost::di;

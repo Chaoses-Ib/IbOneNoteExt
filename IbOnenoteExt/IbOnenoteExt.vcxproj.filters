@@ -13,15 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Boost">
-      <UniqueIdentifier>{a362f616-1e8c-4459-8202-0583dae39995}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Detours">
-      <UniqueIdentifier>{d41ba39d-a81b-4c36-b9f7-d548fbb14171}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\eventpp">
-      <UniqueIdentifier>{9ac3464c-2d2d-496a-a146-e40d5bdba3ed}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -33,41 +24,8 @@
     <ClInclude Include="helper.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Detours\detours.h">
-      <Filter>Source Files\Detours</Filter>
-    </ClInclude>
-    <ClInclude Include="Detours\detver.h">
-      <Filter>Source Files\Detours</Filter>
-    </ClInclude>
-    <ClInclude Include="Detours\syelog.h">
-      <Filter>Source Files\Detours</Filter>
-    </ClInclude>
-    <ClInclude Include="Boost\di.hpp">
-      <Filter>Source Files\Boost</Filter>
-    </ClInclude>
     <ClInclude Include="Onenote.hpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="eventpp\callbacklist.h">
-      <Filter>Source Files\eventpp</Filter>
-    </ClInclude>
-    <ClInclude Include="eventpp\eventdispatcher.h">
-      <Filter>Source Files\eventpp</Filter>
-    </ClInclude>
-    <ClInclude Include="eventpp\eventpolicies.h">
-      <Filter>Source Files\eventpp</Filter>
-    </ClInclude>
-    <ClInclude Include="eventpp\eventqueue.h">
-      <Filter>Source Files\eventpp</Filter>
-    </ClInclude>
-    <ClInclude Include="eventpp\hetercallbacklist.h">
-      <Filter>Source Files\eventpp</Filter>
-    </ClInclude>
-    <ClInclude Include="eventpp\hetereventdispatcher.h">
-      <Filter>Source Files\eventpp</Filter>
-    </ClInclude>
-    <ClInclude Include="eventpp\hetereventqueue.h">
-      <Filter>Source Files\eventpp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
