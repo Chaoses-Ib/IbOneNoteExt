@@ -24,7 +24,7 @@
     <ClInclude Include="helper.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Onenote.hpp">
+    <ClInclude Include="OneNote.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

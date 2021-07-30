@@ -1,25 +1,25 @@
-// dllmain.cpp : Defines the entry point for the DLL application.
+ï»¿// dllmain.cpp : Defines the entry point for the DLL application.
 #include "pch.h"
 #include <string>
 #include <string_view>
 #include <sstream>
 #include "helper.hpp"
 #include <detours/detours.h>
-#include "Onenote.hpp"
+#include "OneNote.hpp"
 #include <boost/di.hpp>
 #include <yaml-cpp/yaml.h>
 
 using namespace std;
 namespace di = boost::di;
 
-using namespace Onenote;
-struct MyOnenote {
+using namespace OneNote;
+struct MyOneNote {
     struct ChangeCalibriToYahei {
         ChangeCalibriToYahei(Editor::Font::EventCreateFont& create_font) {
             create_font.callbacks.append([](const wchar* (&fontname)) {
                 DebugOutput(wstringstream() << "CreateFont " << fontname);
                 if (!wcscmp(fontname, L"Calibri")) {
-                    fontname = L"Î¢ÈíÑÅºÚ";
+                    fontname = L"å¾®è½¯é›…é»‘";
                 }
             });
         }
@@ -30,16 +30,16 @@ struct MyOnenote {
         StyleApply(Editor::Styles::EventApplyStyle apply_style) {
             apply_style.callbacks.append([](Editor::Styles::Style* (&style)) {
                 if (style->FontNameLength == 7 && !wcscmp(style->StyleName, L"Calibri")) {
-                    wcsncpy_s(style->FontName, L"Î¢ÈíÑÅºÚ", 5);
+                    wcsncpy_s(style->FontName, L"å¾®è½¯é›…é»‘", 5);
                     style->FontNameLength = 4;
                 }
                 //static const wstring target_styles[] = {
-                //	L"±êÌâ 1", L"±êÌâ 2", L"±êÌâ 3", L"±êÌâ 4", L"±êÌâ 5", L"±êÌâ 6",
-                //	L"ÒýÎÄ", L"ÒýÓÃ"
+                //	L"æ ‡é¢˜ 1", L"æ ‡é¢˜ 2", L"æ ‡é¢˜ 3", L"æ ‡é¢˜ 4", L"æ ‡é¢˜ 5", L"æ ‡é¢˜ 6",
+                //	L"å¼•æ–‡", L"å¼•ç”¨"
                 //};
                 //for (const wstring& s : target_styles) {
                 //	if (s.length() == style->StyleNameLength && s == style->StyleName) {
-                //		wcsncpy_s(style->FontName, L"Î¢ÈíÑÅºÚ", 5);
+                //		wcsncpy_s(style->FontName, L"å¾®è½¯é›…é»‘", 5);
                 //		style->FontNameLength = 4;
                 //		break;
                 //	}
@@ -112,7 +112,7 @@ struct MyOnenote {
         }
     };
 
-    MyOnenote() {
+    MyOneNote() {
         YAML::Node default_config = YAML::Load(R"(
 Editor:
   ChangeCalibriToYahei: true
@@ -155,15 +155,15 @@ BOOL APIENTRY DllMain(HMODULE hModule,
     wstring path = *makeModule::CurrentProcess()->GetPath();
     DebugOutput(L"Loaded("s + to_wstring(ul_reason_for_call) + L") in: " + path);
 
-    optional<MyOnenote> onenote;
+    optional<MyOneNote> onenote;
 
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
         DisableThreadLibraryCalls(hModule);
         DetourRestoreAfterWith();
-        if (!_wcsicmp(path.c_str(), Onenote::Path))
-            onenote = MyOnenote();
+        if (!_wcsicmp(path.c_str(), OneNote::Path))
+            onenote = MyOneNote();
         break;
     case DLL_THREAD_ATTACH:
         break;

@@ -1,10 +1,10 @@
-#pragma once
+﻿#pragma once
 #include "pch.h"
 #include <optional>
 #include "helper.hpp"
 #include <eventpp/callbacklist.h>
 
-namespace Onenote {
+namespace OneNote {
     using eventpp::CallbackList;
 
     const wchar Path[] = LR"(C:\Program Files\Microsoft Office\Office16\ONENOTE.EXE)";

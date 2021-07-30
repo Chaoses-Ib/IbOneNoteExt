@@ -22,8 +22,9 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{ee2bfcb4-bc19-46f9-9af6-6a45f321abb7}</ProjectGuid>
-    <RootNamespace>IbOnenoteExt</RootNamespace>
+    <RootNamespace>OneNoteExt</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>OneNoteExt</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -190,7 +191,7 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="helper.hpp" />
-    <ClInclude Include="Onenote.hpp" />
+    <ClInclude Include="OneNote.hpp" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>

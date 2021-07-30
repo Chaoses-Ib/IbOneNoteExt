@@ -1,4 +1,4 @@
-# IbOnenoteExt
+﻿# IbOneNoteExt
 语言: [English](README.md), [简体中文](README.zh-Hans)  
 Microsoft OneNote 的一个扩展。
 
