@@ -143,22 +143,5 @@ namespace OneNote {
                 }
             };
         }
-
-        namespace Hyperlink {
-            // Another way is adding a registry key: HKEY_CURRENT_USER\Software\Microsoft\Office\16.0\Common\Security\DisableHyperlinkWarning 1
-            // See https://docs.microsoft.com/en-us/office365/troubleshoot/administration/enable-disable-hyperlink-warning for details
-            class DisableHyperlinkWarning {
-            public:
-                DisableHyperlinkWarning(Modules::ONMain ONMain) {
-                    auto OpenUnsafeHyperlink = ONMain.base.offset(0x6882AC);
-                    OpenUnsafeHyperlink.offset(0x21).Unprotected(6, [](addr p) {
-                        const byte_t patch[] = { 0x48, 0x31, 0xC0, 0x90, 0x90, 0x90 };
-                        memcpy(p, patch, 6);
-                        return true;
-                    });
-                }
-            };
-        }
-
     }
 }

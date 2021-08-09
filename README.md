@@ -5,7 +5,7 @@ An extension for Microsoft OneNote.
 ## Features
 * Change font Calibri to Microsoft YaHei.
 * Do not copy as images when copying plain text.
-* Disable warnings against opening unsafe hyperlinks.
+* Disable hyperlink warnings.
 
 ## Supported Versions
 * Microsoft OneNote 2016 (16.0.5014.1000) 64-bit
@@ -28,9 +28,6 @@ Editor:
   # Affects display of existing text using Calibri.
   # Make it unable to manually apply Calibri to text.
   ChangeCalibriToYahei: true
-
-  # Disable warnings against opening unsafe hyperlinks.
-  DisableHyperlinkWarning: true
 ```
 (UTF-8 encoding)
 

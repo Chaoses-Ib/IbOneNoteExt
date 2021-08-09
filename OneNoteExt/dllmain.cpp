@@ -116,7 +116,6 @@ struct MyOneNote {
         YAML::Node default_config = YAML::Load(R"(
 Editor:
   ChangeCalibriToYahei: true
-  DisableHyperlinkWarning: true
 )");
         YAML::Node config;
         try
@@ -133,9 +132,6 @@ Editor:
 
         if (GET(["Editor"]["ChangeCalibriToYahei"]).as<bool>()) {
             static auto create = injector.create<ChangeCalibriToYahei>();
-        }
-        if (GET(["Editor"]["DisableHyperlinkWarning"]).as<bool>()) {
-            static auto create = injector.create<Editor::Hyperlink::DisableHyperlinkWarning>();
         }
 
         {

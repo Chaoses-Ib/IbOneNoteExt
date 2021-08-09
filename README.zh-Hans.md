@@ -5,7 +5,7 @@ Microsoft OneNote 的一个扩展。
 ## 功能
 * 修改 Calibri 字体为微软雅黑。
 * 复制纯文本内容时不复制为图片。
-* 禁用打开不安全超链接时的警告。
+* 关闭超链接警告。
 
 ## 支持版本
 * Microsoft OneNote 2016 (16.0.5014.1000) 64位
@@ -28,9 +28,6 @@ Editor:
   # 影响现有使用 Calibri 的文本的显示。
   # 导致不能再向文本手动应用 Calibri。
   ChangeCalibriToYahei: true
-
-  # 禁用打开不安全超链接时的警告。
-  DisableHyperlinkWarning: true
 ```
 （UTF-8 编码）
 
