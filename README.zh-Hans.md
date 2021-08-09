@@ -8,12 +8,12 @@ Microsoft OneNote 的一个扩展。
 * 关闭超链接警告。
 
 ## 支持版本
-* Microsoft OneNote 2016 (16.0.5014.1000) 64位
+* Microsoft OneNote 适用于 Microsoft 365 MSO (16.0.14228.20216) 64位
 
 ## 安装
 1. 关闭 OneNote，等几分钟。
 1. 从 [Releases](../../releases) 下载发行文件。
-1. 把发行文件中的 version.dll 放进 C:\Program Files\Microsoft Office\Office16。
+1. 把发行文件中的 version.dll 放进 `C:\Program Files\Microsoft Office\root\Office16` 。
 1. 重新启动 OneNote。
 
 ## 配置

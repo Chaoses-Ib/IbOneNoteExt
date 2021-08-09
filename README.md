@@ -8,12 +8,12 @@ An extension for Microsoft OneNote.
 * Disable hyperlink warnings.
 
 ## Supported Versions
-* Microsoft OneNote 2016 (16.0.5014.1000) 64-bit
+* Microsoft OneNote for Micrsoft 365 MSO (16.0.14228.20216) 64-bit
 
 ## Installation
 1. Close OneNote, wait a moment.
 1. Download release files from [Releases](../../releases).
-1. Put the version.dll in the release files into C:\Program Files\Microsoft Office\Office16 .
+1. Put the version.dll in the release files into `C:\Program Files\Microsoft Office\root\Office16` .
 1. Restart OneNote.
 
 ## Configuration

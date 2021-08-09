@@ -7,7 +7,7 @@
 namespace OneNote {
     using eventpp::CallbackList;
 
-    const wchar Path[] = LR"(C:\Program Files\Microsoft Office\Office16\ONENOTE.EXE)";
+    const wchar Path[] = LR"(C:\Program Files\Microsoft Office\root\Office16\ONENOTE.EXE)";
 
     namespace Modules {
         class ONMain : public Module {
@@ -18,7 +18,7 @@ namespace OneNote {
         class riched20 : public Module {
         public:
             riched20() : Module(*makeModule::Load(
-                LR"(C:\Program Files\Common Files\microsoft shared\OFFICE16\RICHED20.DLL)"
+                LR"(C:\Program Files\Microsoft Office\root\vfs\ProgramFilesCommonX64\Microsoft Shared\OFFICE16\RICHED20.DLL)"
                 // Don't just "riched20.dll", it will load C:\Windows\System32\riched20.dll
                 // Creating a thread to wait riched20.dll loaded doesn't work, it will conflict with Onetastic (unless you wait several seconds).
             )) {};
@@ -47,7 +47,7 @@ namespace OneNote {
                 static inline CallbackList<void(const wchar*(&fontname))> callbacks;
 
                 EventCreateFont(Modules::riched20& riched20) {
-                    GetFontByName = riched20.base.offset(0x49168);
+                    GetFontByName = riched20.base.offset(0x305F4);
                     IbDetourAttach(&GetFontByName, GetFontByNameDetour);
                     DebugOutput(L"EventCreateFont");
                     /*
@@ -111,8 +111,8 @@ namespace OneNote {
             public:
                 static inline CallbackList<void(Style* (&style))> callbacks;
 
-                EventApplyStyle(Modules::ONMain ONMain) {
-                    StyleFunc1 = ONMain.base.offset(0xCB090);
+                [[deprecated]] EventApplyStyle(Modules::ONMain ONMain) {
+                    StyleFunc1 = ONMain.base.offset(0xCB090);  //#TODO
                     IbDetourAttach(&StyleFunc1, StyleFunc1Detour);
                 }
                 ~EventApplyStyle() {
@@ -133,8 +133,8 @@ namespace OneNote {
             public:
                 static inline CallbackList<void(float *scale)> callbacks;
 
-                EventGetScale(Modules::ONMain ONMain) {
-                    GetScale = ONMain.base.offset(0x10EB00);
+                [[deprecated]] EventGetScale(Modules::ONMain ONMain) {
+                    GetScale = ONMain.base.offset(0x10EB00);  //#TODO
                     IbDetourAttach(&GetScale, GetScaleDetour);
                 }
                 ~EventGetScale()
