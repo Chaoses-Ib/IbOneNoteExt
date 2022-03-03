@@ -112,7 +112,7 @@
       <UseStandardPreprocessor>true</UseStandardPreprocessor>
       <AdditionalBMIDirectories>
       </AdditionalBMIDirectories>
-      <AdditionalIncludeDirectories>..\external;..\external\eventpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\external\IbDllHijackLib\include;..\external\eventpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -135,7 +135,7 @@
       <UseStandardPreprocessor>true</UseStandardPreprocessor>
       <AdditionalBMIDirectories>
       </AdditionalBMIDirectories>
-      <AdditionalIncludeDirectories>..\external;..\external\eventpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\external\IbDllHijackLib\include;..\external\eventpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -159,7 +159,7 @@
       <UseStandardPreprocessor>true</UseStandardPreprocessor>
       <AdditionalBMIDirectories>
       </AdditionalBMIDirectories>
-      <AdditionalIncludeDirectories>..\external;..\external\eventpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\external\IbDllHijackLib\include;..\external\eventpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -182,7 +182,7 @@
       <UseStandardPreprocessor>true</UseStandardPreprocessor>
       <AdditionalBMIDirectories>
       </AdditionalBMIDirectories>
-      <AdditionalIncludeDirectories>..\external;..\external\eventpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\external\IbDllHijackLib\include;..\external\eventpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
