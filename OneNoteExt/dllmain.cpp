@@ -141,7 +141,7 @@ Editor:
     }
 };
 
-#include <IbDllHijackLib/Dlls/version.h>
+#include <IbDllHijackLib/include/dlls/version.h>
 
 BOOL APIENTRY DllMain(HMODULE hModule,
     DWORD  ul_reason_for_call,

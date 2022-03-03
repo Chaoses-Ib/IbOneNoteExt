@@ -31,11 +31,13 @@ Editor:
 ```
 (UTF-8 encoding)
 
-## Credits
-This project uses the following open source libraries:
+## Building
+```
+set VCPKG_DEFAULT_TRIPLET=x64-windows-static-md
+vcpkg install detours bext-di yaml-cpp
 
-* [Detours](https://github.com/microsoft/detours)
-* [[Boost::ext].DI](https://github.com/boost-ext/di)
-* [eventpp](https://github.com/wqking/eventpp)
-* [IbDllHijackLib](https://github.com/Chaoses-Ib/IbDllHijackLib)
-* [yaml-cpp](https://github.com/jbeder/yaml-cpp)
+mkdir external
+cd external
+git clone --depth 1 --branch v0.1.1 https://github.com/wqking/eventpp.git
+git clone --depth 1 https://github.com/Chaoses-Ib/IbDllHijackLib.git
+```
