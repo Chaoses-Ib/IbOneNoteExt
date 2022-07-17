@@ -1,0 +1,1 @@
+vcpkg install detours bext-di yaml-cpp eventpp --triplet=x64-windows-static-md

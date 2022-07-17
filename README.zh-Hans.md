@@ -31,11 +31,5 @@ Editor:
 ```
 （UTF-8 编码）
 
-## 鸣谢
-本项目使用了以下开源库：
-
-* [Detours](https://github.com/microsoft/detours)
-* [[Boost::ext].DI](https://github.com/boost-ext/di)
-* [eventpp](https://github.com/wqking/eventpp)
-* [IbDllHijackLib](https://github.com/Chaoses-Ib/IbDllHijackLib)
-* [yaml-cpp](https://github.com/jbeder/yaml-cpp)
+## 构建
+见 [Build](README.md#build)。

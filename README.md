@@ -31,15 +31,11 @@ Editor:
 ```
 (UTF-8 encoding)
 
-## Building
-Install vcpkg and Git, and run:
+## Build
+Install [vcpkg](https://github.com/microsoft/vcpkg) and run:
 ```cmd
-set VCPKG_DEFAULT_TRIPLET=x64-windows-static-md
-vcpkg install detours bext-di yaml-cpp
-
-mkdir external
 cd external
-git clone --depth 1 --branch v0.1.1 https://github.com/wqking/eventpp.git
-git clone --depth 1 https://github.com/Chaoses-Ib/IbDllHijackLib.git
+.\vcpkg.bat
+cmake -B build
 ```
 Then open IbOneNoteExt.sln and build.
