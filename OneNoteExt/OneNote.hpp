@@ -1,8 +1,7 @@
 ﻿#pragma once
 #include "pch.h"
-#include <optional>
-#include "helper.hpp"
 #include <eventpp/callbacklist.h>
+#include "helper.hpp"
 
 namespace OneNote {
     using eventpp::CallbackList;
@@ -10,20 +9,20 @@ namespace OneNote {
     const wchar Path[] = LR"(C:\Program Files\Microsoft Office\root\Office16\ONENOTE.EXE)";
 
     namespace Modules {
-        class ONMain : public Module {
+        class ONMain : public ib::Module {
         public:
-            ONMain() : Module(*makeModule::Find(L"ONMain.DLL")) { };
+            ONMain() : Module(ib::ModuleFactory::find(L"ONMain.DLL")) { };
         };
 
-        class riched20 : public Module {
+        class riched20 : public ib::Module {
         public:
-            riched20() : Module(*makeModule::Load(
+            riched20() : Module(ib::ModuleFactory::load(
                 LR"(C:\Program Files\Microsoft Office\root\vfs\ProgramFilesCommonX64\Microsoft Shared\OFFICE16\RICHED20.DLL)"
                 // Don't just "riched20.dll", it will load C:\Windows\System32\riched20.dll
                 // Creating a thread to wait riched20.dll loaded doesn't work, it will conflict with Onetastic (unless you wait several seconds).
             )) {};
             ~riched20() {
-                Free();
+                free();
             }
         };
     }
@@ -49,7 +48,8 @@ namespace OneNote {
                 EventCreateFont(Modules::riched20& riched20) {
                     GetFontByName = riched20.base.offset(0x305F4);
                     IbDetourAttach(&GetFontByName, GetFontByNameDetour);
-                    DebugOutput(L"EventCreateFont");
+                    if constexpr (debug)
+                        DebugOStream() << L"EventCreateFont\n";
                     /*
                     bool success = mod_riched20->addr.offset(0x1B2848).Unprotected(8, [](addr p) {
                         DebugOutput(wstringstream() << L"ModifyDefaultTypeFont: " << L"Original value: "s << hex << (void*)p << L" : " << *(uint64_t*)p);
@@ -97,7 +97,7 @@ namespace OneNote {
                 QWORD StyleNameLength;  //not include \0
                 QWORD StyleNameCapacity;
             private:
-                void assert() {
+                void sassert() {
                     static_assert(sizeof Style == 128);
                 }
             };

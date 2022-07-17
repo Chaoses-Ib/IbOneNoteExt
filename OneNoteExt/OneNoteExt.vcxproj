@@ -112,7 +112,7 @@
       <UseStandardPreprocessor>true</UseStandardPreprocessor>
       <AdditionalBMIDirectories>
       </AdditionalBMIDirectories>
-      <AdditionalIncludeDirectories>..\external\build\_deps\ibdllhijack-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\external\build\_deps\ibwincpp-src\include;..\external\build\_deps\ibdllhijack-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -135,7 +135,7 @@
       <UseStandardPreprocessor>true</UseStandardPreprocessor>
       <AdditionalBMIDirectories>
       </AdditionalBMIDirectories>
-      <AdditionalIncludeDirectories>..\external\build\_deps\ibdllhijack-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\external\build\_deps\ibwincpp-src\include;..\external\build\_deps\ibdllhijack-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -159,7 +159,7 @@
       <UseStandardPreprocessor>true</UseStandardPreprocessor>
       <AdditionalBMIDirectories>
       </AdditionalBMIDirectories>
-      <AdditionalIncludeDirectories>..\external\build\_deps\ibdllhijack-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\external\build\_deps\ibwincpp-src\include;..\external\build\_deps\ibdllhijack-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -182,7 +182,7 @@
       <UseStandardPreprocessor>true</UseStandardPreprocessor>
       <AdditionalBMIDirectories>
       </AdditionalBMIDirectories>
-      <AdditionalIncludeDirectories>..\external\build\_deps\ibdllhijack-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\external\build\_deps\ibwincpp-src\include;..\external\build\_deps\ibdllhijack-src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -202,7 +202,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="helper.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -213,6 +212,11 @@
   <ItemGroup>
     <None Include="..\README.md" />
     <None Include="..\README.zh-Hans.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\external\build\_deps\ibwincpp-build\IbWinCpp.vcxproj">
+      <Project>{4226c6be-ce00-3526-82c6-6134d26e99b7}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
