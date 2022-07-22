@@ -18,6 +18,6 @@ if re.search(r'^## ', page, flags=re.MULTILINE) is None:
     page = re.sub(r'^#', '', page, flags=re.MULTILINE)
 
 # Time marker
-page = re.sub(r'^t(?:\d{6}|\d{4}|\d{2})$', r'\n<!--\g<0>-->', page, flags=re.MULTILINE)
+page = re.sub(r'^t(?:\d{6}|\d{4}|\d{2}|~)(?: \S+)?$', r'\n<!--\g<0>-->', page, flags=re.MULTILINE)
 
 clipboard_set(page)
