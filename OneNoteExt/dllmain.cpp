@@ -1,5 +1,5 @@
 ﻿// dllmain.cpp : Defines the entry point for the DLL application.
-#include "pch.h"
+#include <Windows.h>
 #include <string>
 #include <boost/di.hpp>
 #include <yaml-cpp/yaml.h>
