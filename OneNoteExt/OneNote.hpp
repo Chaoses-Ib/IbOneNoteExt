@@ -6,7 +6,8 @@
 namespace OneNote {
     using eventpp::CallbackList;
 
-    const wchar Path[] = LR"(C:\Program Files\Microsoft Office\root\Office16\ONENOTE.EXE)";
+    //const wchar Path[] = LR"(C:\Program Files\Microsoft Office\root\Office16\ONENOTE.EXE)";
+    const wchar Path[] = LR"(C:\Program Files\Microsoft Office\Office16\ONENOTE.EXE)";
 
     namespace Modules {
         class ONMain : public ib::Module {
@@ -17,7 +18,8 @@ namespace OneNote {
         class riched20 : public ib::Module {
         public:
             riched20() : Module(ib::ModuleFactory::load(
-                LR"(C:\Program Files\Microsoft Office\root\vfs\ProgramFilesCommonX64\Microsoft Shared\OFFICE16\RICHED20.DLL)"
+                //LR"(C:\Program Files\Microsoft Office\root\vfs\ProgramFilesCommonX64\Microsoft Shared\OFFICE16\RICHED20.DLL)"
+                LR"(C:\Program Files\Common Files\microsoft shared\OFFICE16\RICHED20.DLL)"
                 // Don't just "riched20.dll", it will load C:\Windows\System32\riched20.dll
                 // Creating a thread to wait riched20.dll loaded doesn't work, it will conflict with Onetastic (unless you wait several seconds).
             )) {};
@@ -137,7 +139,11 @@ namespace OneNote {
                     - 365_16.0.14228.20216: 1
                     */
 
-                    GetFontByName = riched20.base.offset(0x305F4);
+                    // 365_16.0.14228.20216: 0x305F4
+                    // 2016_16.0.5435.1001: 0x49138
+                    // 2016_16.0.5014.1000: 0x49168
+                    // 2016_16.0.4266.1001: 0x49310
+                    GetFontByName = riched20.base.offset(0x49138);
 
                     IbDetourAttach(&GetFontByName, GetFontByNameDetour);
                     if constexpr (debug)
