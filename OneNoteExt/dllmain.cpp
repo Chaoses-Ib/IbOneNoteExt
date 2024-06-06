@@ -13,6 +13,8 @@ using namespace OneNote;
 struct MyOneNote {
     struct ChangeCalibriToYahei {
         ChangeCalibriToYahei(Editor::Font::EventCreateFont& create_font) {
+            // Another possible approach is to modify the EmbeddedFontTable
+
             create_font.callbacks.append([](const wchar* (&fontname)) {
                 if constexpr (debug)
                     DebugOStream() << L"CreateFont " << fontname << L'\n';

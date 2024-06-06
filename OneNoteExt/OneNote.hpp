@@ -46,7 +46,99 @@ namespace OneNote {
                 static inline CallbackList<void(const wchar*(&fontname))> callbacks;
 
                 EventCreateFont(Modules::riched20& riched20) {
+
+                    /*
+                    # GetFontByName
+                    2016_16.0.5014.1000:
+                    48 89 5C 24 10       mov     [rsp+arg_8], rbx
+                    55                   push    rbp
+                    56                   push    rsi
+                    57                   push    rdi
+                    41 56                push    r14
+                    41 57                push    r15
+
+                    UWP_16.0.13328.20348:
+                    48 89 5C 24 08                       mov     [rsp-28h+arg_0], rbx
+                    48 89 74 24 10                       mov     [rsp-28h+arg_8], rsi
+                    48 89 7C 24 20                       mov     [rsp-28h+arg_18], rdi
+                    55                                   push    rbp
+                    41 54                                push    r12
+                    41 55                                push    r13
+                    41 56                                push    r14
+                    41 57                                push    r15
+                    48 8B EC                             mov     rbp, rsp
+
+                    365_16.0.14228.20216:
+                    48 89 5C 24 10                       mov     [rsp-28h+arg_8], rbx
+                    48 89 74 24 18                       mov     [rsp-28h+arg_10], rsi
+                    48 89 7C 24 20                       mov     [rsp-28h+arg_18], rdi
+                    55                                   push    rbp
+                    41 54                                push    r12
+                    41 55                                push    r13
+                    41 56                                push    r14
+                    41 57                                push    r15
+                    48 8B EC                             mov     rbp, rsp
+                    48 83 EC 60                          sub     rsp, 60h
+                    33 DB                                xor     ebx, ebx
+
+                    48 89 5C 24 ??
+
+                    
+                    0x17D:
+                    81 FA F7 7F 00 00                    cmp     edx, 32759
+                    0F 8D 53 05 0C 00                    jge     loc_1800F0CD0
+                    81 FA F7 7F 00 00
+                    - 2016_16.0.5014.1000: 0 (static)
+                    - 365_16.0.14228.20216: 1
+
+                    0x7F:
+                    81 FF F7 7F 00 00                    cmp     edi, 32759
+                    0F 8D E3 00 00 00                    jge     loc_180027326
+                    81 FF F7 7F 00 00
+                    - 2016_16.0.5014.1000: 0 (static)
+                    - UWP_16.0.13328.20348: 1 (static)
+                    - 365_16.0.14228.20216: 0
+
+                    81 ?? F7 7F 00 00
+                    - 365_16.0.14228.20216: 2
+
+                    0x18D:
+                    41 8D 40 08                          lea     eax, [r8+8]
+                    3D FF 7F 00 00                       cmp     eax, 7FFFh
+                    0F 8D D5 F2 06 00                    jge     loc_1800B85D9
+                    41 8D 40 08 3D FF 7F 00 00
+                    - 2016_16.0.5014.1000: 1 (static)
+                    - 365_16.0.14228.20216: 0
+
+
+                    0x166:
+                    8D 58 44                             lea     ebx, [rax+68]
+                    - 2016_16.0.5014.1000: 1 (static)
+                    - 365_16.0.14228.20216: 0
+
+                    0x280:
+                    8D 7E 45                             lea     edi, [rsi+69]
+                    - 2016_16.0.5014.1000: 0 (static)
+                    - 365_16.0.14228.20216: 1
+
+
+                    E8 ED EA FF FF       call    @GetFontByName
+                    66 89 43 04          mov     [rbx+4], ax
+                    E8 ?? ?? ?? ?? 66 89 43 04
+                    - 2016_16.0.5014.1000: 1 (static)
+                    - UWP_16.0.13328.20348: 1 (static)
+                    - 365_16.0.14228.20216: 1
+
+                    E8 21 49 01 00                       call    @GetFontByName
+                    66 89 43 12                          mov     [rbx+12h], ax
+                    E8 ?? ?? ?? ?? 66 89 43 12
+                    - 2016_16.0.5014.1000: 0 (static)
+                    - UWP_16.0.13328.20348: 1 (static)
+                    - 365_16.0.14228.20216: 1
+                    */
+
                     GetFontByName = riched20.base.offset(0x305F4);
+
                     IbDetourAttach(&GetFontByName, GetFontByNameDetour);
                     if constexpr (debug)
                         DebugOStream() << L"EventCreateFont\n";
