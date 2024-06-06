@@ -1,23 +1,23 @@
 ﻿// dllmain.cpp : Defines the entry point for the DLL application.
-#include "pch.h"
+#include <Windows.h>
 #include <string>
-#include <string_view>
-#include <sstream>
-#include "helper.hpp"
-#include <detours/detours.h>
-#include "OneNote.hpp"
 #include <boost/di.hpp>
 #include <yaml-cpp/yaml.h>
+#include "helper.hpp"
+#include "OneNote.hpp"
 
-using namespace std;
+using namespace std::literals;
 namespace di = boost::di;
 
 using namespace OneNote;
 struct MyOneNote {
     struct ChangeCalibriToYahei {
         ChangeCalibriToYahei(Editor::Font::EventCreateFont& create_font) {
+            // Another possible approach is to modify the EmbeddedFontTable
+
             create_font.callbacks.append([](const wchar* (&fontname)) {
-                DebugOutput(wstringstream() << "CreateFont " << fontname);
+                if constexpr (debug)
+                    DebugOStream() << L"CreateFont " << fontname << L'\n';
                 if (!wcscmp(fontname, L"Calibri")) {
                     fontname = L"微软雅黑";
                 }
@@ -79,7 +79,7 @@ struct MyOneNote {
                     void* p = GlobalLock(h);
                     if (!p) goto end;
 
-                    u8string_view html{ (const char8_t*)p, GlobalSize(h) };
+                    std::u8string_view html{ (const char8_t*)p, GlobalSize(h) };
                     // or contains() when C++23 is supported...
                     bool plain = html.find(u8"<img\r\n") == ""sv.npos && html.find(u8"<table ") == ""sv.npos;
 
@@ -116,7 +116,6 @@ struct MyOneNote {
         YAML::Node default_config = YAML::Load(R"(
 Editor:
   ChangeCalibriToYahei: true
-  DisableHyperlinkWarning: true
 )");
         YAML::Node config;
         try
@@ -125,7 +124,7 @@ Editor:
         }
         catch (const YAML::BadFile&)
         {
-            config = move(default_config);
+            config = std::move(default_config);
         }
 
         auto injector = di::make_injector();
@@ -133,9 +132,6 @@ Editor:
 
         if (GET(["Editor"]["ChangeCalibriToYahei"]).as<bool>()) {
             static auto create = injector.create<ChangeCalibriToYahei>();
-        }
-        if (GET(["Editor"]["DisableHyperlinkWarning"]).as<bool>()) {
-            static auto create = injector.create<Editor::Hyperlink::DisableHyperlinkWarning>();
         }
 
         {
@@ -145,6 +141,8 @@ Editor:
     }
 };
 
+#include <IbDllHijack/dlls/version.h>
+
 BOOL APIENTRY DllMain(HMODULE hModule,
     DWORD  ul_reason_for_call,
     LPVOID lpReserved
@@ -152,17 +150,18 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 {
     if (DetourIsHelperProcess())
         return TRUE;
-    wstring path = *makeModule::CurrentProcess()->GetPath();
-    DebugOutput(L"Loaded("s + to_wstring(ul_reason_for_call) + L") in: " + path);
+    ib::wzstring path = ib::ModuleFactory::current_process().get_path();
+    if constexpr (debug)
+        DebugOStream() << L"Loaded(" << L") in: " << (wchar*)path;
 
-    optional<MyOneNote> onenote;
+    std::optional<MyOneNote> onenote;
 
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
         DisableThreadLibraryCalls(hModule);
         DetourRestoreAfterWith();
-        if (!_wcsicmp(path.c_str(), OneNote::Path))
+        if (!_wcsicmp((wchar*)path, OneNote::Path))
             onenote = MyOneNote();
         break;
     case DLL_THREAD_ATTACH:
